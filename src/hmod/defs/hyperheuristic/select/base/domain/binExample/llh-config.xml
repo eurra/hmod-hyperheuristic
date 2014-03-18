@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    Updated    : 27/02/2013
+    Author     : Enrique Urra C.
+    Description:
+    
+        Definition file template that configures the low-level heuristics of
+        the binary example problem.
+-->
+
+<algorithmDefinition>
+   
+    <subStep id="selHyp_initHeuristic" subRef="binExample_initSolution_01"/>    
+    <subStep id="selHyp_endHeuristic" subRef="binExample_endBinary_01"/>
+    
+    <array id="selHyp_heuristics" class="hMod.core.Step" length="3">
+        <field set="ref" pos="0" dest="binExample_flipAll_01"/>
+        <field set="ref" pos="1" dest="binExample_randomMutate_01"/>
+        <field set="ref" pos="2" dest="binExample_randomize_01"/>
+    </array>
+    
+</algorithmDefinition>

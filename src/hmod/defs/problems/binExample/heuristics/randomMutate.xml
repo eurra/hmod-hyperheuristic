@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    Updated    : 28/02/2013
+    Author     : Enrique Urra C.
+    Description:
+        Definition file of the 'random mutate' heuristic, for the binary example
+        problem.
+-->
+
+<algorithmDefinition>
+        
+    <directStep id="binExample_randomMutate_01" opDef="binExample/randomMutate">
+        <diSetter def="binExample/solutionSetter" dest="binExample_data"/>
+    </directStep>
+    
+</algorithmDefinition>

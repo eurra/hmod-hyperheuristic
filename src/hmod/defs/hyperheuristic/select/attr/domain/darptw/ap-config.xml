@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    Document   : template-ap-config.xml
+    Updated    : 25/02/2013
+    Author     : Enrique Urra C.
+    Description:    
+        Definition file that configures the attribute processors for the 
+        dial-a-ride problem.
+-->
+
+<algorithmDefinition>
+    
+    <array id="selHyp_soData_processors" class="hMod.hyperheuristic.selection.model.attr.AttrProcessor" length="2">
+        <field set="bean" pos="0" valClass="hMod.problems.darptw.db.VehicleAttrProcessor"/>
+        <field set="bean" pos="1" valClass="hMod.problems.darptw.db.EventPairAttrProcessor"/>
+    </array>
+    
+</algorithmDefinition>

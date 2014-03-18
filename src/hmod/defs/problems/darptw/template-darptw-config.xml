@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<algorithmDefinition>
+    
+    <!-- The benchmark file to use -->
+    <prim id="darptw_instanceFile" class="String" val="path/of/your/file"/>
+    
+    <!-- The evaluation's transit time weight -->
+    <prim id="darptw_transitTimeWeight" class="double" val="(value)"/>
+    <!-- The evaluation's route duration weight -->
+    <prim id="darptw_routeDurationWeight" class="double" val="(value)"/>
+    <!-- The evaluation's slack time weight -->
+    <prim id="darptw_slackTimeWeight" class="double" val="(value)"/>
+     
+    <!-- The evaluation's ride time weight -->
+    <prim id="darptw_rideTimeWeight" class="double" val="(value)"/>
+    <!-- The evaluation's excess ride time weight -->
+    <prim id="darptw_excessRideTimeWeight" class="double" val="(value)"/>    
+    <!-- The evaluation's wait time weight -->
+    <prim id="darptw_waitTimeWeight" class="double" val="(value)"/>    
+      
+    <!-- The evaluation's time windows violation weight -->
+    <prim id="darptw_timeWindowsViolationWeight" class="double" val="(value)"/>
+    <!-- The evaluation's maximum route duration violation weight -->
+    <prim id="darptw_maximumRouteDurationViolationWeight" class="double" val="(value)"/>
+    <!-- The evaluation's maximum ride time violation weight -->
+    <prim id="darptw_maximumRideTimeViolationWeight" class="double" val="(value)"/>
+
+</algorithmDefinition>

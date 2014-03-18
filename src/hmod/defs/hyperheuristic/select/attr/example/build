@@ -1,0 +1,83 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Example file for building the hyperheuristic attributive memory model 
+% extension.
+%
+% This file provides an example to build the attributive memory hyperheuristic 
+% model and a dial-a-ride problem domain.
+%
+% Remember that definition and batch files are highly customizable. This is
+% only an example of the default hyperheuristic model load. Custom models
+% would require additional components that must be specified an/or exemplified
+% by their providers.
+%
+% Particularly, this file provides all the definitions required to build the
+% model, allowing to load the algorithm in memory. This script do NOT launch
+% the algorithm, see the 'main' batch file for this purpose. After running this 
+% file, the algorithm may be executed directly by calling the 'run' command.
+%
+% This batch file uses two variables, which may be previously set:
+%  - The BASE_PATH variable, which must hold the root path of the base 
+%    hyperheuristic model definitions.
+%  - The ATTR_PATH variable, which must hold the root path of the attributive 
+%    hyperheuristic model definitions.
+%  - The DARPTW_PATH variable, which must hold the root path of the darptw
+%    problem definitions.
+%
+% Run this file as:
+%     'batch /hmod/defs/hyperheuristic/select/attr/example/build'
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Reset any other loaded algorithm
+reset
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SECTION 1: Problem domain configuration
+
+load @ATTR_PATH@/domain/darptw/db-config.xml
+load @BASE_PATH@/domain/darptw/llh-config.xml
+
+% The attributive memory model works based on attribute processors at the domain
+% barrier layer, which extract the attributes from the low-level for their usage
+% at the high-level as relevant search information. A template file for the
+% configuration of these processors is provided in  'defs/hyperheuristic/select/
+% attr/template-ap-config.xml'.
+load @ATTR_PATH@/domain/darptw/ap-config.xml
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SECTION 2: Algorithm structure loading
+
+% Selection hyperheuristic core load
+load @BASE_PATH@/data.xml
+load @BASE_PATH@/main.xml
+
+% Domain barrier operators
+load @BASE_PATH@/operator/db-call-init-heuristic.xml
+load @BASE_PATH@/operator/db-call-heuristic.xml
+load @BASE_PATH@/operator/db-call-end-heuristic.xml
+load @ATTR_PATH@/operator/db-call-init-heuristic-mod.xml
+load @ATTR_PATH@/operator/db-call-heuristic-mod.xml
+load @ATTR_PATH@/operator/db-attr-update.xml
+
+% Heuristic selection operator. We provide the Strategic Oscillation HS
+load @ATTR_PATH@/operator/hs-strategic-osc.xml
+
+% Heuristic selection operator. We provide the Strategic Oscillation MA
+load @BASE_PATH@/operator/ma-improv-equals.xml
+%load @ATTR_PATH@/operator/ma-strategic-osc.xml
+
+% DARPTW example problem load
+load @DARPTW_PATH@/data.xml
+load @DARPTW_PATH@/heuristics/initSolution.xml
+load @DARPTW_PATH@/heuristics/moveClientAllRoutes.xml
+load @DARPTW_PATH@/heuristics/moveEventAllRoutes.xml
+load @DARPTW_PATH@/heuristics/moveRandomClient.xml
+load @DARPTW_PATH@/heuristics/moveSingleEvent.xml
+load @DARPTW_PATH@/heuristics/reportResult.xml
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SECTION 3: Execution configuration
+
+% Run configuration files
+load @ATTR_PATH@/example/darptw-config.xml
+load @ATTR_PATH@/example/run-config.xml
+load @ATTR_PATH@/example/db-attr-update-config.xml

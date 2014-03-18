@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    Updated    : 08/05/2013
+    Author     : Enrique Urra C.
+    Description:
+        The definition of the domain barrier operator for the initializer 
+        low-level heuristic calling.
+-->
+
+<algorithmDefinition>
+
+    <subStep id="selHyp_dbCallInitHeuristic_01" subRef="selHyp_initHeuristic" nextRef="selHyp_dbCallInitHeuristic_02"/>
+    
+    <directStep id="selHyp_dbCallInitHeuristic_02" nextRef="selHyp_dbCallInitHeuristic_03">
+        <ref dest="selHyp_lowLevelReaderOp"/>
+    </directStep>
+    
+    <directStep id="selHyp_dbCallInitHeuristic_03" nextRef="selHyp_dbCallInitHeuristic_04">
+        <ref dest="selHyp_encoderOp"/>
+    </directStep>
+    
+    <directStep id="selHyp_dbCallInitHeuristic_04" opDef="selHyp/selectState" nextRef="selHyp_dbCallInitHeuristic_05">
+        <diSetter def="selHyp/shSolutionSetter" dest="selHyp_mainData"/>
+        <diSetter def="selHyp/stepSetter" dest="selHyp_mainData"/>
+    </directStep>
+    
+    <directStep id="selHyp_dbCallInitHeuristic_05" opDef="selHyp/acceptState">
+        <diSetter def="selHyp/shSolutionSetter" dest="selHyp_mainData"/>
+        <diSetter def="selHyp/stepSetter" dest="selHyp_mainData"/>
+    </directStep>
+    
+</algorithmDefinition>

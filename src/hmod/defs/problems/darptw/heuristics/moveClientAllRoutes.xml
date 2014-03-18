@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<algorithmDefinition>
+    
+    <vBean id="darptw_moveClientAllRoutes_data">
+        <vBeanDef>
+            <vBeanType def="darptw/routeHandler"/>
+            <vBeanType def="hMod/iterationHandler"/>
+        </vBeanDef>
+    </vBean>
+    
+    <vBean id="darptw_moveClientAllRoutes_routeSeq">
+        <vBeanDef>
+            <vBeanType def="darptw/routeHandler"/>
+        </vBeanDef>
+    </vBean>
+    
+    <vBean id="darptw_moveClientAllRoutes_origData">
+        <vBeanDef>
+            <vBeanType def="darptw/routeIndexHandler"/>
+            <vBeanType def="darptw/clientIdHandler"/>            
+        </vBeanDef>
+    </vBean>
+    
+    <vBean id="darptw_moveClientAllRoutes_destData">
+        <vBeanDef>
+            <vBeanType def="darptw/routeIndexHandler"/> 
+            <vBeanType def="darptw/insertionPosHandler"/>
+        </vBeanDef>
+    </vBean>
+    
+    <directStep id="darptw_moveClientAllRoutes_01" opDef="darptw/readRoutes" nextRef="darptw_moveClientAllRoutes_02">
+        <diSetter def="darptw/solutionSetter" dest="darptw_commonData"/>
+        <diSetter def="darptw/routeSetter" dest="darptw_moveClientAllRoutes_data"/>
+    </directStep>
+    
+    <directStep id="darptw_moveClientAllRoutes_02" opDef="darptw/createRandomRouteSequence" nextRef="darptw_moveClientAllRoutes_03">
+        <diSetter def="darptw/routeOrigSetter" dest="darptw_moveClientAllRoutes_data"/>
+        <diSetter def="darptw/routeDestSetter" dest="darptw_moveClientAllRoutes_routeSeq"/>            
+    </directStep>
+    
+    <directStep id="darptw_moveClientAllRoutes_03" opDef="darptw/routeIndexIterationReset" nextRef="darptw_moveClientAllRoutes_04">
+        <diSetter def="hMod/iterationSetter" dest="darptw_moveClientAllRoutes_data"/>
+        <diSetter def="darptw/routeSetter" dest="darptw_moveClientAllRoutes_routeSeq"/>            
+    </directStep>
+    
+    <directStep id="darptw_moveClientAllRoutes_04" opDef="darptw/selectRouteFromIterator" nextRef="darptw_moveClientAllRoutes_05">
+        <diSetter def="hMod/iterationSetter" dest="darptw_moveClientAllRoutes_data"/>
+        <diSetter def="darptw/routeIndexSetter" dest="darptw_moveClientAllRoutes_origData"/>
+    </directStep>
+    
+    <booleanStep id="darptw_moveClientAllRoutes_05" opDef="darptw/voidRouteCheck" nextTrueRef="darptw_moveClientAllRoutes_12" nextFalseRef="darptw_moveClientAllRoutes_06">
+        <diSetter def="darptw/routeSetter" dest="darptw_moveClientAllRoutes_routeSeq"/>
+        <diSetter def="darptw/routeIndexSetter" dest="darptw_moveClientAllRoutes_origData"/>
+    </booleanStep>
+    
+    <directStep id="darptw_moveClientAllRoutes_06" opDef="darptw/selectRandomClientFromRoute" nextRef="darptw_moveClientAllRoutes_07">
+        <diSetter def="darptw/routeSetter" dest="darptw_moveClientAllRoutes_routeSeq"/>
+        <diSetter def="darptw/routeIndexSetter" dest="darptw_moveClientAllRoutes_origData"/>
+        <diSetter def="darptw/clientIdSetter" dest="darptw_moveClientAllRoutes_origData"/>
+    </directStep>
+    
+    <directStep id="darptw_moveClientAllRoutes_07" opDef="darptw/selectRandomRoute" nextRef="darptw_moveClientAllRoutes_08">
+        <diSetter def="darptw/routeSetter" dest="darptw_moveClientAllRoutes_routeSeq"/>
+        <diSetter def="darptw/routeIndexSetter" dest="darptw_moveClientAllRoutes_destData"/>
+    </directStep>
+    
+    <booleanStep id="darptw_moveClientAllRoutes_08" opDef="darptw/checkSameRouteIndex" nextTrueRef="darptw_moveClientAllRoutes_07" nextFalseRef="darptw_moveClientAllRoutes_09">
+        <diSetter def="darptw/routeIndexOrigSetter" dest="darptw_moveClientAllRoutes_origData"/>
+        <diSetter def="darptw/routeIndexDestSetter" dest="darptw_moveClientAllRoutes_destData"/>          
+    </booleanStep>
+    
+    <directStep id="darptw_moveClientAllRoutes_09" opDef="darptw/selectRandomInsertionPoint" nextRef="darptw_moveClientAllRoutes_10">
+        <diSetter def="darptw/routeSetter" dest="darptw_moveClientAllRoutes_routeSeq"/>
+        <diSetter def="darptw/routeIndexSetter" dest="darptw_moveClientAllRoutes_destData"/>
+        <diSetter def="darptw/insertionPosSetter" dest="darptw_moveClientAllRoutes_destData"/>
+    </directStep>
+    
+    <directStep id="darptw_moveClientAllRoutes_10" opDef="darptw/removeClient" nextRef="darptw_moveClientAllRoutes_11">
+        <diSetter def="darptw/routeSetter" dest="darptw_moveClientAllRoutes_routeSeq"/>
+        <diSetter def="darptw/routeIndexSetter" dest="darptw_moveClientAllRoutes_origData"/>
+        <diSetter def="darptw/clientIdSetter" dest="darptw_moveClientAllRoutes_origData"/>
+    </directStep>
+    
+    <directStep id="darptw_moveClientAllRoutes_11" opDef="darptw/insertClient" nextRef="darptw_moveClientAllRoutes_12">
+        <diSetter def="darptw/clientIdSetter" dest="darptw_moveClientAllRoutes_origData"/>
+        <diSetter def="darptw/routeSetter" dest="darptw_moveClientAllRoutes_routeSeq"/>
+        <diSetter def="darptw/routeIndexSetter" dest="darptw_moveClientAllRoutes_destData"/>
+        <diSetter def="darptw/insertionPosSetter" dest="darptw_moveClientAllRoutes_destData"/>
+    </directStep>
+    
+    <booleanStep id="darptw_moveClientAllRoutes_12" opDef="hMod/iterationMaxCheck" nextTrueRef="darptw_moveClientAllRoutes_13" nextFalseRef="darptw_moveClientAllRoutes_04">
+        <diSetter def="hMod/iterationSetter" dest="darptw_moveClientAllRoutes_data"/>
+    </booleanStep>
+    
+    <directStep id="darptw_moveClientAllRoutes_13" opDef="darptw/writeRoutes">
+        <diSetter def="darptw/solutionSetter" dest="darptw_commonData"/>
+        <diSetter def="darptw/routeSetter" dest="darptw_moveClientAllRoutes_data"/>
+        <diSetter def="darptw/problemInstanceSetter" dest="darptw_commonData"/>
+        <diSetter def="darptw/evaluationProfileSetter" dest="darptw_commonData"/>
+    </directStep>
+        
+    <!-- Wrapper, for heuristic testing -->
+    
+    <subStep id="darptw_moveClientAllRoutesWrapper_01" subRef="darptw_initSolution_01" nextRef="darptw_moveClientAllRoutesWrapper_02"/>
+    
+    <directStep id="darptw_moveClientAllRoutesWrapper_02" opDef="darptw/outputSolutionToInput" nextRef="darptw_moveClientAllRoutesWrapper_03">
+        <diSetter def="darptw/solutionSetter" dest="darptw_commonData"/>
+    </directStep>
+    
+    <subStep id="darptw_moveClientAllRoutesWrapper_03" subRef="darptw_moveClientAllRoutes_01" nextRef="darptw_moveClientAllRoutesWrapper_04"/>
+    
+    <directStep id="darptw_moveClientAllRoutesWrapper_04" opDef="darptw/printSolutionInfo">
+        <diSetter def="darptw/solutionSetter" dest="darptw_commonData"/>
+    </directStep>
+    
+</algorithmDefinition>

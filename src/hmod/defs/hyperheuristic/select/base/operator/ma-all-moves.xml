@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    Updated    : 26/02/2013
+    Author     : Enrique Urra C.
+    Description:
+        Defines the structure of the All Moves acceptance procedure.
+-->
+
+<algorithmDefinition>
+
+    <directStep id="selHyp_maAllMoves_01" opDef="selHyp/acceptState">
+        <diSetter def="selHyp/shSolutionSetter" dest="selHyp_mainData"/>
+        <diSetter def="selHyp/stepSetter" dest="selHyp_mainData"/>
+    </directStep>
+    
+</algorithmDefinition>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    Updated    : 26/02/2013
+    Author     : Enrique Urra C.
+    Description:
+        Defines the structure of the Simple Random Descent heuristic selection 
+        procedure.
+-->
+
+<algorithmDefinition>
+    
+    <booleanStep id="selHyp_hsSimpleRandomDescent_01" opDef="selHyp/checkSolutionImproved" nextTrueRef="selHyp_hsSimpleRandomDescent_03" nextFalseRef="selHyp_hsSimpleRandomDescent_02">
+        <diSetter def="selHyp/shSolutionSetter" dest="selHyp_mainData"/>
+        <diSetter def="selHyp/stepSetter" dest="selHyp_mainData"/>
+    </booleanStep>
+    
+    <directStep id="selHyp_hsSimpleRandomDescent_02" opDef="selHyp/randomSelect" nextRef="selHyp_hsSimpleRandomDescent_03">
+        <diSetter def="selHyp/stepSetter" dest="selHyp_mainData"/>
+        <diSetter def="selHyp/stepSetSetter" dest="selHyp_mainData"/>
+    </directStep>
+
+    <directStep id="selHyp_hsSimpleRandomDescent_03" opDef="selHyp/initSolution" nextRef="selHyp_hsSimpleRandomDescent_04">
+        <diSetter def="selHyp/shSolutionSetter" dest="selHyp_mainData"/>
+    </directStep>
+    
+    <subStep id="selHyp_hsSimpleRandomDescent_04" subRef="selHyp_dbCallHeuristic_01" nextRef="selHyp_hsSimpleRandomDescent_05"/>
+
+    <directStep id="selHyp_hsSimpleRandomDescent_05" opDef="selHyp/selectState">
+        <diSetter def="selHyp/shSolutionSetter" dest="selHyp_mainData"/>
+        <diSetter def="selHyp/stepSetter" dest="selHyp_mainData"/>
+    </directStep>
+    
+</algorithmDefinition>

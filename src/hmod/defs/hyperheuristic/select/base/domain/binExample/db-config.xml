@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    Updated    : 27/02/2013
+    Author     : Enrique Urra C.
+    Description:
+            
+        Definition file template that configures the domain barrier layer to
+        connect the default hyperheuristic model with the binary example 
+        problem.
+-->
+
+<algorithmDefinition>
+    
+    <operator id="selHyp_decoderOp" def="binExample/hhBinarySolutionDecode">
+        <diSetter def="selHyp/highLevelSolutionSetter" dest="selHyp_mainData"/>
+        <diSetter def="selHyp/lowLevelSolutionSetter" dest="selHyp_diLowLevelHandler"/>
+    </operator>
+    
+    <operator id="selHyp_encoderOp" def="binExample/hhBinarySolutionEncode">
+        <diSetter def="selHyp/highLevelSolutionSetter" dest="selHyp_mainData"/>
+        <diSetter def="selHyp/lowLevelSolutionSetter" dest="selHyp_diLowLevelHandler"/>
+    </operator>
+    
+    <operator id="selHyp_lowLevelReaderOp" def="binExample/binarySolutionReader">
+        <diSetter def="selHyp/lowLevelSolutionSetter" dest="selHyp_diLowLevelHandler"/>
+        <diSetter def="binExample/solutionSetter" dest="binExample_data"/>
+    </operator>
+    
+    <operator id="selHyp_lowLevelWriterOp" def="binExample/binarySolutionWriter">
+        <diSetter def="selHyp/lowLevelSolutionSetter" dest="selHyp_diLowLevelHandler"/>
+        <diSetter def="binExample/solutionSetter" dest="binExample_data"/>
+    </operator>
+    
+</algorithmDefinition>

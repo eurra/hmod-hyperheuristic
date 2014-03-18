@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    Updated    : 26/02/2013
+    Author     : Enrique Urra C.
+    Description:
+        Defines the structure of the Improving or Equal acceptance procedure.
+-->
+
+<algorithmDefinition>
+
+    <booleanStep id="selHyp_maImprovingEqual_01" opDef="selHyp/improvingOrEqualAcceptance" nextTrueRef="selHyp_maImprovingEqual_02">
+        <diSetter def="selHyp/shSolutionSetter" dest="selHyp_mainData"/>
+    </booleanStep>
+
+    <directStep id="selHyp_maImprovingEqual_02" opDef="selHyp/acceptState">
+        <diSetter def="selHyp/shSolutionSetter" dest="selHyp_mainData"/>
+        <diSetter def="selHyp/stepSetter" dest="selHyp_mainData"/>
+    </directStep>
+    
+</algorithmDefinition>

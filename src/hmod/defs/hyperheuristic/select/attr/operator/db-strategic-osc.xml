@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    Updated    : 15/05/2013
+    Author     : Enrique Urra C.
+    Description:
+        Implements the strategic oscillation update procedure, which is called
+        within the domain barrier.
+-->
+
+<algorithmDefinition>
+
+    <!--
+        The following virtual bean stores the oscillation-related data and 
+        processors to use in the execution. A template of the processors' 
+        configuration is in the file 'template-ap-config.xml', and an example of
+        the parameters configuration is in the file 
+        'db-strategic-osc-config.xml'.
+    -->
+    <vBean id="selHyp_soData">
+        <vBeanDef>
+            <vBeanType def="selHyp/soDataHandler"/>
+            <vBeanType def="selHyp/attrProcessorHandler"/>
+        </vBeanDef>
+        <field set="ref" name="AttrProcessors" class="hMod.hyperheuristic.selection.model.attr.AttrProcessor" arrDepth="1" dest="selHyp_soData_processors"/>
+        <field set="ref" name="StrategyChangeSpeed" class="double" dest="selHyp_soData_changeSpeed"/>
+        <field set="ref" name="OscillationModifier" class="double" dest="selHyp_soData_oscModifier"/>
+    </vBean>
+
+    <!-- The procedure starts here -->
+    <directStep id="selHyp_strategicOsc_01" opDef="selHyp/updateAttributes" nextRef="selHyp_strategicOsc_02">
+        <diSetter def="selHyp/shSolutionSetter" dest="selHyp_mainData"/>
+        <diSetter def="selHyp/lowLevelSolutionSetter" dest="selHyp_diLowLevelHandler"/>
+        <diSetter def="selHyp/attrProcessorSetter" dest="selHyp_soData"/>
+    </directStep>
+    
+    <booleanStep id="selHyp_strategicOsc_02" opDef="selHyp/checkBestImproved" nextTrueRef="selHyp_strategicOsc_06" nextFalseRef="selHyp_strategicOsc_03">
+        <diSetter def="selHyp/shSolutionSetter" dest="selHyp_mainData"/>
+    </booleanStep>
+    
+    <directStep id="selHyp_strategicOsc_03" opDef="selHyp/updateImprovementData" nextRef="selHyp_strategicOsc_04">
+        <diSetter def="selHyp/shSolutionSetter" dest="selHyp_mainData"/>
+        <diSetter def="selHyp/soDataSetter" dest="selHyp_soData"/>
+    </directStep>
+    
+    <directStep id="selHyp_strategicOsc_04" opDef="selHyp/updatePiMultiplier" nextRef="selHyp_strategicOsc_05">
+        <diSetter def="selHyp/soDataSetter" dest="selHyp_soData"/>
+    </directStep>
+    
+    <booleanStep id="selHyp_strategicOsc_05" opDef="selHyp/checkPiMultiplier" nextTrueRef="selHyp_strategicOsc_07" nextFalseRef="selHyp_strategicOsc_06">
+        <diSetter def="selHyp/soDataSetter" dest="selHyp_soData"/>
+    </booleanStep>
+    
+    <directStep id="selHyp_strategicOsc_06" opDef="selHyp/strategyRestart" nextRef="selHyp_strategicOsc_07">
+        <diSetter def="selHyp/soDataSetter" dest="selHyp_soData"/>
+    </directStep>
+    
+    <directStep id="selHyp_strategicOsc_07" opDef="selHyp/updateOscillationRate">
+        <diSetter def="selHyp/soDataSetter" dest="selHyp_soData"/>
+    </directStep>
+    
+</algorithmDefinition>

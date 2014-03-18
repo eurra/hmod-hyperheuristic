@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    Updated    : 25/02/2013
+    Author     : Enrique Urra C.
+    Description:
+        The definition of the domain barrier operator for low-level heuristic
+        calling.
+-->
+
+<algorithmDefinition>
+    
+    <directStep id="selHyp_dbCallHeuristic_01" opDef="selHyp/llStepConfig" nextRef="selHyp_dbCallHeuristic_02">
+        <field set="ref" name="SubStep" class="hMod.core.SubStep" dest="selHyp_dbCallHeuristic_04"/>
+        <diSetter def="selHyp/stepSetter" dest="selHyp_mainData"/>
+    </directStep>
+    
+    <directStep id="selHyp_dbCallHeuristic_02" nextRef="selHyp_dbCallHeuristic_03">
+        <ref dest="selHyp_decoderOp"/>
+    </directStep>
+    
+    <directStep id="selHyp_dbCallHeuristic_03" nextRef="selHyp_dbCallHeuristic_04">
+        <ref dest="selHyp_lowLevelWriterOp"/>
+    </directStep>
+    
+    <subStep id="selHyp_dbCallHeuristic_04" nextRef="selHyp_dbCallHeuristic_05"/>
+    
+    <directStep id="selHyp_dbCallHeuristic_05" nextRef="selHyp_dbCallHeuristic_06">
+        <ref dest="selHyp_lowLevelReaderOp"/>
+    </directStep>
+    
+    <directStep id="selHyp_dbCallHeuristic_06">
+        <ref dest="selHyp_encoderOp"/>
+    </directStep>
+    
+</algorithmDefinition>

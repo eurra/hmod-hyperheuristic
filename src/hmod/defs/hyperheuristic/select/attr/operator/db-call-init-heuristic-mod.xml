@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    Updated    : 16/05/2013
+    Author     : Enrique Urra C.
+    Description:
+        Extension of the domain barrier, for the attributive memory model.
+-->
+
+<algorithmDefinition>
+    
+    <!--
+        The following operator is replaced regarding the original version to
+        support the connection with the following step.
+    -->
+    <directStep id="selHyp_dbCallInitHeuristic_03" nextRef="selHyp_dbCallInitHeuristic_03_a">
+        <ref dest="selHyp_encoderOp"/>
+    </directStep>
+    
+    <subStep id="selHyp_dbCallInitHeuristic_03_a" subRef="selHyp_strategicOsc_01" nextRef="selHyp_dbCallInitHeuristic_04"/>
+    
+</algorithmDefinition>

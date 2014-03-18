@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    Updated    : 26/02/2013
+    Author     : Enrique Urra C.
+    Description:
+        Configuration for the attributive memory model.
+-->
+
+<algorithmDefinition>    
+    
+    <!--
+        Oscillation modifier parameter:
+            Defines how much time is spent on the intensification and 
+            diversification zones in the search. This value ranges from 0 to 1,  
+            and the bigger the value is, more abrupt is the change from 
+            intensification to diversification.
+    -->
+    <prim id="selHyp_soData_oscModifier" class="double" val="0.2"/>
+    
+    <!--
+        Strategy change speed:
+            Defines how faster the transition from intensification to 
+            diversification occurs. This value ranges from 0 to 1, and the 
+            bigger the value is, less non-improving iterations are required to
+            fall into the diversification zone.
+    -->
+    <prim id="selHyp_soData_changeSpeed" class="double" val="0.1"/>
+    
+</algorithmDefinition>

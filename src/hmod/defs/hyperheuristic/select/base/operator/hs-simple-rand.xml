@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    Updated    : 26/02/2013
+    Author     : Enrique Urra C.
+    Description:
+        Defines the structure of the Simple Random heuristic selection procedure.
+-->
+
+<algorithmDefinition>
+   
+    <directStep id="selHyp_hsSimpleRandom_01" opDef="selHyp/randomSelect" nextRef="selHyp_hsSimpleRandom_02">
+        <diSetter def="selHyp/stepSetter" dest="selHyp_mainData"/>
+        <diSetter def="selHyp/stepSetSetter" dest="selHyp_mainData"/>
+    </directStep>
+
+    <directStep id="selHyp_hsSimpleRandom_02" opDef="selHyp/initSolution" nextRef="selHyp_hsSimpleRandom_03">
+        <diSetter def="selHyp/shSolutionSetter" dest="selHyp_mainData"/>
+    </directStep>
+    
+    <subStep id="selHyp_hsSimpleRandom_03" subRef="selHyp_dbCallHeuristic_01" nextRef="selHyp_hsSimpleRandom_04"/>
+    
+    <directStep id="selHyp_hsSimpleRandom_04" opDef="selHyp/selectState">
+        <diSetter def="selHyp/shSolutionSetter" dest="selHyp_mainData"/>
+        <diSetter def="selHyp/stepSetter" dest="selHyp_mainData"/>
+    </directStep>
+</algorithmDefinition>

@@ -1,0 +1,8 @@
+Manifest-Version: 1.0
+X-COMMENT: Main-Class will be added automatically by build
+
+Name: hmod/shh/
+Script-Bundle: true
+Script-Bundle-Title: hMod selection hyperheuristic module
+Script-Bundle-Version: 1.0
+Script-Bundle-Description: Scripts to implement selection-based hyperheuristics.

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<algorithmDefinition>
+    
+    <vBean id="darptw_moveEventAllRoutes_data">
+        <vBeanDef>
+            <vBeanType def="darptw/routeHandler"/>
+            <vBeanType def="darptw/routeIndexHandler"/>
+            <vBeanType def="hMod/iterationHandler"/>
+        </vBeanDef>
+    </vBean>
+    
+    <vBean id="darptw_moveEventAllRoutes_origData">
+        <vBeanDef>            
+            <vBeanType def="darptw/eventPosIdHandler"/>            
+        </vBeanDef>
+    </vBean>
+    
+    <vBean id="darptw_moveEventAllRoutes_destData">
+        <vBeanDef>
+            <vBeanType def="darptw/eventPosIdHandler"/>
+        </vBeanDef>
+    </vBean>
+        
+    <directStep id="darptw_moveEventAllRoutes_01" opDef="darptw/readRoutes" nextRef="darptw_moveEventAllRoutes_02">
+        <diSetter def="darptw/solutionSetter" dest="darptw_commonData"/>
+        <diSetter def="darptw/routeSetter" dest="darptw_moveEventAllRoutes_data"/>
+    </directStep>
+    
+    <directStep id="darptw_moveEventAllRoutes_02" opDef="darptw/routeIndexIterationReset" nextRef="darptw_moveEventAllRoutes_03">
+        <diSetter def="hMod/iterationSetter" dest="darptw_moveEventAllRoutes_data"/>
+        <diSetter def="darptw/routeSetter" dest="darptw_moveEventAllRoutes_data"/>            
+    </directStep>
+    
+    <directStep id="darptw_moveEventAllRoutes_03" opDef="darptw/selectRouteFromIterator" nextRef="darptw_moveEventAllRoutes_04">
+        <diSetter def="hMod/iterationSetter" dest="darptw_moveEventAllRoutes_data"/>
+        <diSetter def="darptw/routeIndexSetter" dest="darptw_moveEventAllRoutes_data"/>
+    </directStep>
+    
+    <booleanStep id="darptw_moveEventAllRoutes_04" opDef="darptw/checkSingleClientRoute" nextTrueRef="darptw_moveEventAllRoutes_09" nextFalseRef="darptw_moveEventAllRoutes_05">
+        <diSetter def="darptw/routeSetter" dest="darptw_moveEventAllRoutes_data"/>
+        <diSetter def="darptw/routeIndexSetter" dest="darptw_moveEventAllRoutes_data"/>         
+    </booleanStep>
+    
+    <directStep id="darptw_moveEventAllRoutes_05" opDef="darptw/selectRandomEvent" nextRef="darptw_moveEventAllRoutes_06">
+        <diSetter def="darptw/eventPosIdSetter" dest="darptw_moveEventAllRoutes_origData"/>
+        <diSetter def="darptw/routeSetter" dest="darptw_moveEventAllRoutes_data"/>
+        <diSetter def="darptw/routeIndexSetter" dest="darptw_moveEventAllRoutes_data"/>
+    </directStep>
+    
+    <booleanStep id="darptw_moveEventAllRoutes_06" opDef="darptw/checkMovableEvent" nextTrueRef="darptw_moveEventAllRoutes_07" nextFalseRef="darptw_moveEventAllRoutes_05">
+        <diSetter def="darptw/routeSetter" dest="darptw_moveEventAllRoutes_data"/>
+        <diSetter def="darptw/routeIndexSetter" dest="darptw_moveEventAllRoutes_data"/>
+        <diSetter def="darptw/eventPosIdSetter" dest="darptw_moveEventAllRoutes_origData"/>
+        <diSetter def="darptw/problemInstanceSetter" dest="darptw_commonData"/>
+    </booleanStep>
+    
+    <directStep id="darptw_moveEventAllRoutes_07" opDef="darptw/selectRandomMovePoint" nextRef="darptw_moveEventAllRoutes_08">
+        <diSetter def="darptw/eventPosIdOrigSetter" dest="darptw_moveEventAllRoutes_origData"/>
+        <diSetter def="darptw/eventPosIdDestSetter" dest="darptw_moveEventAllRoutes_destData"/>            
+        <diSetter def="darptw/routeSetter" dest="darptw_moveEventAllRoutes_data"/>
+        <diSetter def="darptw/routeIndexSetter" dest="darptw_moveEventAllRoutes_data"/>
+        <diSetter def="darptw/problemInstanceSetter" dest="darptw_commonData"/>
+    </directStep>
+    
+    <directStep id="darptw_moveEventAllRoutes_08" opDef="darptw/moveEvent" nextRef="darptw_moveEventAllRoutes_09">
+        <diSetter def="darptw/eventPosIdOrigSetter" dest="darptw_moveEventAllRoutes_origData"/>
+        <diSetter def="darptw/eventPosIdDestSetter" dest="darptw_moveEventAllRoutes_destData"/>            
+        <diSetter def="darptw/routeSetter" dest="darptw_moveEventAllRoutes_data"/>
+        <diSetter def="darptw/routeIndexSetter" dest="darptw_moveEventAllRoutes_data"/>
+    </directStep>
+    
+    <booleanStep id="darptw_moveEventAllRoutes_09" opDef="hMod/iterationMaxCheck" nextTrueRef="darptw_moveEventAllRoutes_10" nextFalseRef="darptw_moveEventAllRoutes_03">
+        <diSetter def="hMod/iterationSetter" dest="darptw_moveEventAllRoutes_data"/>
+    </booleanStep>    
+    
+    <directStep id="darptw_moveEventAllRoutes_10" opDef="darptw/writeRoutes">
+        <diSetter def="darptw/solutionSetter" dest="darptw_commonData"/>
+        <diSetter def="darptw/routeSetter" dest="darptw_moveEventAllRoutes_data"/>
+        <diSetter def="darptw/problemInstanceSetter" dest="darptw_commonData"/>
+        <diSetter def="darptw/evaluationProfileSetter" dest="darptw_commonData"/>
+    </directStep>
+    
+    <!-- Wrapper, for heuristic testing -->
+    
+    <subStep id="darptw_moveEventAllRoutesWrapper_01" subRef="darptw_initSolution_01" nextRef="darptw_moveEventAllRoutesWrapper_02"/>
+    
+    <directStep id="darptw_moveEventAllRoutesWrapper_02" opDef="darptw/outputSolutionToInput" nextRef="darptw_moveEventAllRoutesWrapper_03">
+        <diSetter def="darptw/solutionSetter" dest="darptw_commonData"/>
+    </directStep>
+    
+    <subStep id="darptw_moveEventAllRoutesWrapper_03" subRef="darptw_moveEventAllRoutes_01" nextRef="darptw_moveEventAllRoutesWrapper_04"/>
+    
+    <directStep id="darptw_moveEventAllRoutesWrapper_04" opDef="darptw/printSolutionInfo">
+        <diSetter def="darptw/solutionSetter" dest="darptw_commonData"/>
+    </directStep>
+    
+</algorithmDefinition>

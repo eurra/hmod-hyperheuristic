@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<algorithmDefinition>
+    <prim id="selHyp_attrData_eliteSolsMax" class="int" val="25"/>
+    <prim id="selHyp_attrData_oscModifier" class="double" val="0.2"/>
+    <prim id="selHyp_attrData_changeSpeed" class="double" val="0.2"/>    
+</algorithmDefinition>

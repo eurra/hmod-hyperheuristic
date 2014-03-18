@@ -1,0 +1,45 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Example file for executing the hyperheuristic attributive memory model 
+% extension.
+%
+% This file provides an example to run a dial-a-ride problem alongside the 
+% attributive memory hyperheuristic model.
+%
+% Remember that definition and batch files are highly customizable. This is
+% only an example of the default hyperheuristic model load. Custom models
+% would require additional components that must be specified an/or exemplified
+% by their providers.
+%
+% Particularly, this file configures the environment to run the algorithm. The
+% building itself is implemented in the 'build' file, which is called here.
+%
+% Run this file as:
+%     'batch /hmod/defs/hyperheuristic/select/attr/example/run'
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Some variables to use in the algorithm build
+set BASE_PATH /hmod/defs/hyperheuristic/select/base
+set ATTR_PATH /hmod/defs/hyperheuristic/select/attr
+set DARPTW_PATH /hmod/defs/problems/darptw
+
+% Algorithm build, implemented in other batch file
+batch @ATTR_PATH@/example/build
+
+% Start id configuration
+start_id selHyp_main_01
+
+% Output configuration
+clear_outputs
+add_output selHyp-best-fitness
+add_output selHyp-so-info
+set OUTPUT_FILES "@OUTPUT_LOC@/example/hyperheuristic/select/attr/darptw/@D(y)D(M)D(d)-D(NS)@"
+add_file_output darptw-instance-info @OUTPUT_FILES@/darptw-instance-info.txt
+add_file_output darptw-eval-info @OUTPUT_FILES@/darptw-eval-info.txt
+add_file_output darptw-result-detail @OUTPUT_FILES@/darptw-result-detail.txt
+add_file_output darptw-result-sheet @OUTPUT_FILES@/darptw-result-sheet.txt
+add_file_output selHyp-exec-info @OUTPUT_FILES@/selHyp-exec-info.txt
+add_file_output selHyp-result-sheet @OUTPUT_FILES@/selHyp-result-sheet.txt
+%add_file_output selHyp-so-rate-values @OUTPUT_FILES@/selHyp-so-rate-values.txt
+
+% Go!
+run

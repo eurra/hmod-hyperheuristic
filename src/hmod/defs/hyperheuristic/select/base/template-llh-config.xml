@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    Updated    : 08/05/2013
+    Author     : Enrique Urra C.
+    Description:
+        IMPORTANT: This file is only a template, you must write or provide your 
+        own version according to your implementation! Read the instructions 
+        below to learn how the file must be specified.
+    
+        Definition file template that configures the low-level heuristics at the
+        problem domain.
+-->
+
+<algorithmDefinition>
+    
+    <!-- 
+        The initializer heuristic step.
+        - Replace '<first_step_of_init_heuristic>' with the first step of the  
+          low-level heuristic used to generate the initial solution.
+        - Consider that an initializer low-level heuristic does not require a
+          solution input, but must always generate a solution output.
+        - Defining the initializer heuristic is mandatory.
+    -->
+    <subStep id="selHyp_initHeuristic" subRef="<first_step_of_init_heuristic>"/>
+    
+    <!-- 
+        The ending heuristic step.
+        - Replace '<first_step_of_end_heuristic>' with the first step of the  
+          low-level heuristic used at the end of the search.
+        - This heuristic can be used to provide finalization information or for
+          misc low-level cleanup.
+        - Defining the ending heuristic is optional. Remove the "subRef" 
+          attribute for not providing this heuristic.
+    -->
+    <subStep id="selHyp_endHeuristic" subRef="<first_step_of_end_heuristic>"/>
+    
+    <!-- 
+        The array that will store the low-level heuristics initial steps. In 
+        other words, the low-level heuristics to use must been defined here.
+        - Replace '<first_step_of_heuristic_1>', '<first_step_of_heuristic_2>',
+           etc, with the first step id of each low level heuristic to use.
+        - The length of the array must be updated if more low-level heuristics
+          are included.
+    -->
+    <array id="selHyp_heuristics" class="hMod.core.Step" length="3">
+        <field set="ref" pos="0" dest="<first_step_of_heuristic_1>"/>
+        <field set="ref" pos="1" dest="<first_step_of_heuristic_2>"/>
+        <field set="ref" pos="2" dest="<first_step_of_heuristic_3>"/>
+    </array>
+    
+</algorithmDefinition>

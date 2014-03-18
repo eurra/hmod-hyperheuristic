@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    Updated    : 16/05/2013
+    Author     : Enrique Urra C.
+    Description:
+        Defines the context and structure of the Strategic Oscilation heuristic 
+        selection procedure.
+-->
+
+<algorithmDefinition>
+    
+    <!--
+        The following virtual bean stores the operator data.
+    -->
+    <vBean id="selHyp_soSelectionData">
+        <vBeanDef>
+            <vBeanType def="selHyp/soSelectionHandler"/>
+        </vBeanDef>
+    </vBean>
+    
+    <!-- The procedure starts here -->    
+    <directStep id="selHyp_hsStrategicOsc_01" opDef="selHyp/setCurrentHeuristic" nextRef="selHyp_hsStrategicOsc_02">
+        <diSetter def="selHyp/stepSetter" dest="selHyp_mainData"/>
+        <diSetter def="selHyp/stepSetSetter" dest="selHyp_mainData"/>
+    </directStep>
+    
+    <directStep id="selHyp_hsStrategicOsc_02" opDef="selHyp/initSolution" nextRef="selHyp_hsStrategicOsc_03">
+        <diSetter def="selHyp/shSolutionSetter" dest="selHyp_mainData"/>
+    </directStep>
+    
+    <subStep id="selHyp_hsStrategicOsc_03" subRef="selHyp_dbCallHeuristic_01" nextRef="selHyp_hsStrategicOsc_04"/>
+
+    <directStep id="selHyp_hsStrategicOsc_04" opDef="selHyp/updateHeuristicStats" nextRef="selHyp_hsStrategicOsc_05">
+        <diSetter def="selHyp/stepSetter" dest="selHyp_mainData"/>
+        <diSetter def="selHyp/stepSetSetter" dest="selHyp_mainData"/>
+        <diSetter def="selHyp/shSolutionSetter" dest="selHyp_mainData"/>
+        <diSetter def="selHyp/soSelectionSetter" dest="selHyp_soSelectionData"/>
+    </directStep>
+
+    <directStep id="selHyp_hsStrategicOsc_05" opDef="selHyp/selectHeuristicByAttrs" nextRef="selHyp_hsStrategicOsc_06">
+        <diSetter def="selHyp/stepSetter" dest="selHyp_mainData"/>
+        <diSetter def="selHyp/stepSetSetter" dest="selHyp_mainData"/>
+        <diSetter def="selHyp/soDataSetter" dest="selHyp_soData"/>
+        <diSetter def="selHyp/soSelectionSetter" dest="selHyp_soSelectionData"/>
+    </directStep>
+    
+    <directStep id="selHyp_hsStrategicOsc_06" opDef="selHyp/selectState">
+        <diSetter def="selHyp/shSolutionSetter" dest="selHyp_mainData"/>
+        <diSetter def="selHyp/stepSetter" dest="selHyp_mainData"/>
+    </directStep>
+    
+</algorithmDefinition>

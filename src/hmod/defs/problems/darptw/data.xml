@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<algorithmDefinition>
+    
+    <vBean id="darptw_commonData">
+        <vBeanDef>            
+            <vBeanType def="darptw/problemInstanceHandler"/>
+            <vBeanType def="darptw/evaluationProfileHandler"/> 
+            <vBeanType def="darptw/solutionHandler"/>
+        </vBeanDef>
+        <field set="ref" name="InstanceFile" class="String" dest="darptw_instanceFile"/>
+        
+        <field set="ref" name="TransitTimeWeight" class="double" dest="darptw_transitTimeWeight"/>
+        <field set="ref" name="RouteDurationWeight" class="double" dest="darptw_routeDurationWeight"/>
+        <field set="ref" name="SlackTimeWeight" class="double" dest="darptw_slackTimeWeight"/>
+        
+        <field set="ref" name="RideTimeWeight" class="double" dest="darptw_rideTimeWeight"/>
+        <field set="ref" name="ExcessRideTimeWeight" class="double" dest="darptw_excessRideTimeWeight"/>
+        <field set="ref" name="WaitTimeWeight" class="double" dest="darptw_waitTimeWeight"/>
+        
+        <field set="ref" name="TimeWindowsViolationWeight" class="double" dest="darptw_timeWindowsViolationWeight"/>
+        <field set="ref" name="MaximumRouteDurationViolationWeight" class="double" dest="darptw_maximumRouteDurationViolationWeight"/>
+        <field set="ref" name="MaximumRideTimeViolationWeight" class="double" dest="darptw_maximumRideTimeViolationWeight"/>        
+    </vBean>
+    
+</algorithmDefinition>

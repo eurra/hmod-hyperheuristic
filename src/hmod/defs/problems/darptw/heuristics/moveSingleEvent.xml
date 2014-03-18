@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<algorithmDefinition>
+    
+    <vBean id="darptw_moveSingleEvent_data">
+        <vBeanDef>
+            <vBeanType def="darptw/routeHandler"/>
+            <vBeanType def="darptw/routeIndexHandler"/>
+        </vBeanDef>
+    </vBean>
+    
+    <vBean id="darptw_moveSingleEvent_origData">
+        <vBeanDef>            
+            <vBeanType def="darptw/eventPosIdHandler"/>            
+        </vBeanDef>
+    </vBean>
+    
+    <vBean id="darptw_moveSingleEvent_destData">
+        <vBeanDef>
+            <vBeanType def="darptw/eventPosIdHandler"/>
+        </vBeanDef>
+    </vBean>
+        
+    <directStep id="darptw_moveSingleEvent_01" opDef="darptw/readRoutes" nextRef="darptw_moveSingleEvent_02">
+        <diSetter def="darptw/solutionSetter" dest="darptw_commonData"/>
+        <diSetter def="darptw/routeSetter" dest="darptw_moveSingleEvent_data"/>
+    </directStep>
+    
+    <directStep id="darptw_moveSingleEvent_02" opDef="darptw/selectRandomRoute" nextRef="darptw_moveSingleEvent_03">
+        <diSetter def="darptw/routeSetter" dest="darptw_moveSingleEvent_data"/>
+        <diSetter def="darptw/routeIndexSetter" dest="darptw_moveSingleEvent_data"/>
+    </directStep>
+    
+    <booleanStep id="darptw_moveSingleEvent_03" opDef="darptw/checkSingleClientRoute" nextTrueRef="darptw_moveSingleEvent_02" nextFalseRef="darptw_moveSingleEvent_04">
+        <diSetter def="darptw/routeSetter" dest="darptw_moveSingleEvent_data"/>
+        <diSetter def="darptw/routeIndexSetter" dest="darptw_moveSingleEvent_data"/>         
+    </booleanStep>
+    
+    <directStep id="darptw_moveSingleEvent_04" opDef="darptw/selectRandomEvent" nextRef="darptw_moveSingleEvent_05">
+        <diSetter def="darptw/eventPosIdSetter" dest="darptw_moveSingleEvent_origData"/>
+        <diSetter def="darptw/routeSetter" dest="darptw_moveSingleEvent_data"/>
+        <diSetter def="darptw/routeIndexSetter" dest="darptw_moveSingleEvent_data"/>
+    </directStep>
+    
+    <booleanStep id="darptw_moveSingleEvent_05" opDef="darptw/checkMovableEvent" nextTrueRef="darptw_moveSingleEvent_06" nextFalseRef="darptw_moveSingleEvent_04">
+        <diSetter def="darptw/routeSetter" dest="darptw_moveSingleEvent_data"/>
+        <diSetter def="darptw/routeIndexSetter" dest="darptw_moveSingleEvent_data"/>
+        <diSetter def="darptw/eventPosIdSetter" dest="darptw_moveSingleEvent_origData"/>
+        <diSetter def="darptw/problemInstanceSetter" dest="darptw_commonData"/>
+    </booleanStep>
+    
+    <directStep id="darptw_moveSingleEvent_06" opDef="darptw/selectRandomMovePoint" nextRef="darptw_moveSingleEvent_07">
+        <diSetter def="darptw/eventPosIdOrigSetter" dest="darptw_moveSingleEvent_origData"/>
+        <diSetter def="darptw/eventPosIdDestSetter" dest="darptw_moveSingleEvent_destData"/>            
+        <diSetter def="darptw/routeSetter" dest="darptw_moveSingleEvent_data"/>
+        <diSetter def="darptw/routeIndexSetter" dest="darptw_moveSingleEvent_data"/>
+        <diSetter def="darptw/problemInstanceSetter" dest="darptw_commonData"/>
+    </directStep>
+    
+    <directStep id="darptw_moveSingleEvent_07" opDef="darptw/moveEvent" nextRef="darptw_moveSingleEvent_08">
+        <diSetter def="darptw/eventPosIdOrigSetter" dest="darptw_moveSingleEvent_origData"/>
+        <diSetter def="darptw/eventPosIdDestSetter" dest="darptw_moveSingleEvent_destData"/>            
+        <diSetter def="darptw/routeSetter" dest="darptw_moveSingleEvent_data"/>
+        <diSetter def="darptw/routeIndexSetter" dest="darptw_moveSingleEvent_data"/>
+    </directStep>
+    
+    <directStep id="darptw_moveSingleEvent_08" opDef="darptw/writeRoutes">
+        <diSetter def="darptw/solutionSetter" dest="darptw_commonData"/>
+        <diSetter def="darptw/routeSetter" dest="darptw_moveSingleEvent_data"/>
+        <diSetter def="darptw/problemInstanceSetter" dest="darptw_commonData"/>
+        <diSetter def="darptw/evaluationProfileSetter" dest="darptw_commonData"/>
+    </directStep>
+    
+    <!-- Wrapper, for heuristic testing -->
+    
+    <subStep id="darptw_moveSingleEventWrapper_01" subRef="darptw_initSolution_01" nextRef="darptw_moveSingleEventWrapper_02"/>
+    
+    <directStep id="darptw_moveSingleEventWrapper_02" opDef="darptw/outputSolutionToInput" nextRef="darptw_moveSingleEventWrapper_03">
+        <diSetter def="darptw/solutionSetter" dest="darptw_commonData"/>
+    </directStep>
+    
+    <subStep id="darptw_moveSingleEventWrapper_03" subRef="darptw_moveSingleEvent_01" nextRef="darptw_moveSingleEventWrapper_04"/>
+    
+    <directStep id="darptw_moveSingleEventWrapper_04" opDef="darptw/printSolutionInfo">
+        <diSetter def="darptw/solutionSetter" dest="darptw_commonData"/>
+    </directStep>
+    
+</algorithmDefinition>

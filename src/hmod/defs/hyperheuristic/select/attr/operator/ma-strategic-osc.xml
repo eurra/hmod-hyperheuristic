@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    Updated    : 16/05/2013
+    Author     : Enrique Urra C.
+    Description:
+        Defines the context and structure of the Strategic Oscilation move 
+        acceptance procedure.
+-->
+
+<algorithmDefinition>
+    
+    <!--
+        The following virtual beans store the operator data. The second and the
+        third store the general and elite attributive memory references, 
+        respectively. An example of the parameters configuration is in the file
+        'ma-strategic-osc-config.xml'.
+    -->
+    <vBean id="selHyp_soAcceptanceData">
+        <vBeanDef>
+            <vBeanType def="selHyp/soAcceptanceHandler"/>
+        </vBeanDef>
+        <field set="ref" name="EliteSolutionsMax" class="int" dest="selHyp_soAcceptanceData_eliteSolsMax"/>
+    </vBean>
+    
+    <vBean id="selHyp_soAcceptanceGeneralMem">
+        <vBeanDef>
+            <vBeanType def="selHyp/attrMemoryHandler"/>
+        </vBeanDef>
+    </vBean>
+    
+    <vBean id="selHyp_soAcceptanceEliteMem">
+        <vBeanDef>
+            <vBeanType def="selHyp/attrMemoryHandler"/>
+        </vBeanDef>
+    </vBean>
+    
+    <!-- The procedure starts here -->
+    <directStep id="selHyp_maStrategicOsc_01" opDef="selHyp/updateGeneralStats" nextRef="selHyp_maStrategicOsc_02">
+        <diSetter def="selHyp/shSolutionSetter" dest="selHyp_mainData"/>
+        <diSetter def="hMod/iterationSetter" dest="selHyp_mainData"/>
+        <diSetter def="selHyp/generalAttrMemorySetter" dest="selHyp_soAcceptanceGeneralMem"/>
+    </directStep>
+    
+    <directStep id="selHyp_maStrategicOsc_02" opDef="selHyp/updateEliteStats" nextRef="selHyp_maStrategicOsc_03">
+        <diSetter def="selHyp/shSolutionSetter" dest="selHyp_mainData"/>
+        <diSetter def="selHyp/soAcceptanceSetter" dest="selHyp_soAcceptanceData"/>
+        <diSetter def="hMod/iterationSetter" dest="selHyp_mainData"/>
+        <diSetter def="selHyp/eliteAttrMemorySetter" dest="selHyp_soAcceptanceEliteMem"/>
+    </directStep>
+    
+    <booleanStep id="selHyp_maStrategicOsc_03" opDef="selHyp/improvingOrEqualAcceptance" nextTrueRef="selHyp_maStrategicOsc_05" nextFalseRef="selHyp_maStrategicOsc_04">
+        <diSetter def="selHyp/shSolutionSetter" dest="selHyp_mainData"/>
+    </booleanStep>
+    
+    <booleanStep id="selHyp_maStrategicOsc_04" opDef="selHyp/attributeBasedAcceptance" nextTrueRef="selHyp_maStrategicOsc_05">
+        <diSetter def="selHyp/shSolutionSetter" dest="selHyp_mainData"/>
+        <diSetter def="selHyp/soDataSetter" dest="selHyp_soData"/>
+        <diSetter def="selHyp/soAcceptanceSetter" dest="selHyp_soAcceptanceData"/>
+        <diSetter def="selHyp/generalAttrMemorySetter" dest="selHyp_soAcceptanceGeneralMem"/>
+        <diSetter def="selHyp/eliteAttrMemorySetter" dest="selHyp_soAcceptanceEliteMem"/>
+    </booleanStep>
+    
+    <directStep id="selHyp_maStrategicOsc_05" opDef="selHyp/acceptState">
+        <diSetter def="selHyp/shSolutionSetter" dest="selHyp_mainData"/>
+        <diSetter def="selHyp/stepSetter" dest="selHyp_mainData"/>
+    </directStep>
+    
+</algorithmDefinition>

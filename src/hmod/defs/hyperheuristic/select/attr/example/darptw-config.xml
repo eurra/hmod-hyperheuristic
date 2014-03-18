@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<algorithmDefinition>
+
+    <prim id="darptw_instanceFile" class="String" val="input/problems/darptw/pr01.txt"/>
+    
+    <!-- Parameter setting of customer choice -->
+    <prim id="darptw_transitTimeWeight" class="double" val="8.0"/>
+    <prim id="darptw_routeDurationWeight" class="double" val="1.0"/>
+    <prim id="darptw_slackTimeWeight" class="double" val="0.0"/>     
+    <prim id="darptw_rideTimeWeight" class="double" val="0.0"/>
+    <prim id="darptw_excessRideTimeWeight" class="double" val="3.0"/>    
+    <prim id="darptw_waitTimeWeight" class="double" val="1.0"/>      
+    <prim id="darptw_timeWindowsViolationWeight" class="double" val="24.0"/>
+    <prim id="darptw_maximumRouteDurationViolationWeight" class="double" val="24.0"/>
+    <prim id="darptw_maximumRideTimeViolationWeight" class="double" val="24.0"/>
+
+    <!-- Parameter setting of operator choice -->
+<!--
+    <prim id="darptw_transitTimeWeight" class="double" val="8.0"/>
+    <prim id="darptw_routeDurationWeight" class="double" val="2.0"/>
+    <prim id="darptw_slackTimeWeight" class="double" val="0.0"/>     
+    <prim id="darptw_rideTimeWeight" class="double" val="0.0"/>
+    <prim id="darptw_excessRideTimeWeight" class="double" val="0.0"/>    
+    <prim id="darptw_waitTimeWeight" class="double" val="1.0"/>      
+    <prim id="darptw_timeWindowsViolationWeight" class="double" val="24.0"/>
+    <prim id="darptw_maximumRouteDurationViolationWeight" class="double" val="24.0"/>
+    <prim id="darptw_maximumRideTimeViolationWeight" class="double" val="24.0"/>
+-->
+
+</algorithmDefinition>

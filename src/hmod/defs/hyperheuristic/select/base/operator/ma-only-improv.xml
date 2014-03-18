@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    Updated    : 26/02/2013
+    Author     : Enrique Urra C.
+    Description:
+        Defines the structure of the Only Improving acceptance procedure.
+-->
+
+<algorithmDefinition>
+
+    <booleanStep id="selHyp_maOnlyImproving_01" opDef="selHyp/onlyImprovingAcceptance" nextTrueRef="selHyp_maOnlyImproving_02">
+        <diSetter def="selHyp/shSolutionSetter" dest="selHyp_mainData"/>
+    </booleanStep>
+
+    <directStep id="selHyp_maOnlyImproving_02" opDef="selHyp/acceptState">
+        <diSetter def="selHyp/shSolutionSetter" dest="selHyp_mainData"/>
+        <diSetter def="selHyp/stepSetter" dest="selHyp_mainData"/>
+    </directStep>
+    
+</algorithmDefinition>

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<algorithmDefinition>
+    
+    <vBean id="darptw_moveRandomClient_data">
+        <vBeanDef>
+            <vBeanType def="darptw/routeHandler"/>
+        </vBeanDef>
+    </vBean>
+    
+    <vBean id="darptw_moveRandomClient_origData">
+        <vBeanDef>
+            <vBeanType def="darptw/routeIndexHandler"/>
+            <vBeanType def="darptw/clientIdHandler"/>            
+        </vBeanDef>
+    </vBean>
+    
+    <vBean id="darptw_moveRandomClient_destData">
+        <vBeanDef>
+            <vBeanType def="darptw/routeIndexHandler"/> 
+            <vBeanType def="darptw/insertionPosHandler"/>
+        </vBeanDef>
+    </vBean>
+        
+    <directStep id="darptw_moveRandomClient_01" opDef="darptw/readRoutes" nextRef="darptw_moveRandomClient_02">
+        <diSetter def="darptw/solutionSetter" dest="darptw_commonData"/>
+        <diSetter def="darptw/routeSetter" dest="darptw_moveRandomClient_data"/>
+    </directStep>
+    
+    <directStep id="darptw_moveRandomClient_02" opDef="darptw/selectRandomRoute" nextRef="darptw_moveRandomClient_03">
+        <diSetter def="darptw/routeSetter" dest="darptw_moveRandomClient_data"/>
+        <diSetter def="darptw/routeIndexSetter" dest="darptw_moveRandomClient_origData"/>
+    </directStep>
+    
+    <booleanStep id="darptw_moveRandomClient_03" opDef="darptw/voidRouteCheck" nextTrueRef="darptw_moveRandomClient_02" nextFalseRef="darptw_moveRandomClient_04">
+        <diSetter def="darptw/routeSetter" dest="darptw_moveRandomClient_data"/>
+        <diSetter def="darptw/routeIndexSetter" dest="darptw_moveRandomClient_origData"/>
+    </booleanStep>
+    
+    <directStep id="darptw_moveRandomClient_04" opDef="darptw/selectRandomRoute" nextRef="darptw_moveRandomClient_05">
+        <diSetter def="darptw/routeSetter" dest="darptw_moveRandomClient_data"/>
+        <diSetter def="darptw/routeIndexSetter" dest="darptw_moveRandomClient_destData"/>
+    </directStep>
+    
+    <booleanStep id="darptw_moveRandomClient_05" opDef="darptw/checkSameRouteIndex" nextTrueRef="darptw_moveRandomClient_04" nextFalseRef="darptw_moveRandomClient_06">
+        <diSetter def="darptw/routeIndexOrigSetter" dest="darptw_moveRandomClient_origData"/>
+        <diSetter def="darptw/routeIndexDestSetter" dest="darptw_moveRandomClient_destData"/>          
+    </booleanStep>
+    
+    <directStep id="darptw_moveRandomClient_06" opDef="darptw/selectRandomClientFromRoute" nextRef="darptw_moveRandomClient_07">
+        <diSetter def="darptw/routeSetter" dest="darptw_moveRandomClient_data"/>
+        <diSetter def="darptw/routeIndexSetter" dest="darptw_moveRandomClient_origData"/>
+        <diSetter def="darptw/clientIdSetter" dest="darptw_moveRandomClient_origData"/>
+    </directStep>
+    
+    <directStep id="darptw_moveRandomClient_07" opDef="darptw/selectRandomInsertionPoint" nextRef="darptw_moveRandomClient_08">
+        <diSetter def="darptw/routeSetter" dest="darptw_moveRandomClient_data"/>
+        <diSetter def="darptw/routeIndexSetter" dest="darptw_moveRandomClient_destData"/>
+        <diSetter def="darptw/insertionPosSetter" dest="darptw_moveRandomClient_destData"/>
+    </directStep>
+    
+    <directStep id="darptw_moveRandomClient_08" opDef="darptw/removeClient" nextRef="darptw_moveRandomClient_09">
+        <diSetter def="darptw/routeSetter" dest="darptw_moveRandomClient_data"/>
+        <diSetter def="darptw/routeIndexSetter" dest="darptw_moveRandomClient_origData"/>
+        <diSetter def="darptw/clientIdSetter" dest="darptw_moveRandomClient_origData"/>
+    </directStep>
+    
+    <directStep id="darptw_moveRandomClient_09" opDef="darptw/insertClient" nextRef="darptw_moveRandomClient_10">
+        <diSetter def="darptw/clientIdSetter" dest="darptw_moveRandomClient_origData"/>
+        <diSetter def="darptw/routeSetter" dest="darptw_moveRandomClient_data"/>
+        <diSetter def="darptw/routeIndexSetter" dest="darptw_moveRandomClient_destData"/>
+        <diSetter def="darptw/insertionPosSetter" dest="darptw_moveRandomClient_destData"/>
+    </directStep>
+    
+    <directStep id="darptw_moveRandomClient_10" opDef="darptw/writeRoutes">
+        <diSetter def="darptw/solutionSetter" dest="darptw_commonData"/>
+        <diSetter def="darptw/routeSetter" dest="darptw_moveRandomClient_data"/>
+        <diSetter def="darptw/problemInstanceSetter" dest="darptw_commonData"/>
+        <diSetter def="darptw/evaluationProfileSetter" dest="darptw_commonData"/>
+    </directStep>
+    
+    <!-- Wrapper, for heuristic testing -->
+    
+    <subStep id="darptw_moveRandomClientWrapper_01" subRef="darptw_initSolution_01" nextRef="darptw_moveRandomClientWrapper_02"/>
+    
+    <directStep id="darptw_moveRandomClientWrapper_02" opDef="darptw/outputSolutionToInput" nextRef="darptw_moveRandomClientWrapper_03">
+        <diSetter def="darptw/solutionSetter" dest="darptw_commonData"/>
+    </directStep>
+    
+    <subStep id="darptw_moveRandomClientWrapper_03" subRef="darptw_moveRandomClient_01" nextRef="darptw_moveRandomClientWrapper_04"/>
+    
+    <directStep id="darptw_moveRandomClientWrapper_04" opDef="darptw/printSolutionInfo">
+        <diSetter def="darptw/solutionSetter" dest="darptw_commonData"/>
+    </directStep>
+    
+</algorithmDefinition>

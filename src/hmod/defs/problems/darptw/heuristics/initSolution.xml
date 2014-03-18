@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<algorithmDefinition>
+    
+    <vBean id="darptw_initSolution_data">
+        <vBeanDef>
+            <vBeanType def="darptw/routeHandler"/>
+            <vBeanType def="hMod/iterationHandler"/>
+            <vBeanType def="darptw/routeIndexHandler"/>
+            <vBeanType def="darptw/clientIdHandler"/>
+            <vBeanType def="darptw/insertionPosHandler"/>
+        </vBeanDef>
+    </vBean>
+    
+    <directStep id="darptw_initSolution_01" opDef="darptw/initProblemInstance" nextRef="darptw_initSolution_02">
+        <diSetter def="darptw/problemInstanceSetter" dest="darptw_commonData"/>
+        <diSetter def="darptw/evaluationProfileSetter" dest="darptw_commonData"/>
+    </directStep>
+    
+    <directStep id="darptw_initSolution_02" opDef="darptw/initRoutes" nextRef="darptw_initSolution_03">
+        <diSetter def="darptw/routeSetter" dest="darptw_initSolution_data"/>
+        <diSetter def="darptw/problemInstanceSetter" dest="darptw_commonData"/>
+    </directStep>
+    
+    <directStep id="darptw_initSolution_03" opDef="darptw/clientIdIterationReset" nextRef="darptw_initSolution_04">
+        <diSetter def="hMod/iterationSetter" dest="darptw_initSolution_data"/>
+        <diSetter def="darptw/problemInstanceSetter" dest="darptw_commonData"/>
+    </directStep>
+    
+    <directStep id="darptw_initSolution_04" opDef="darptw/selectRandomRoute" nextRef="darptw_initSolution_05">
+        <diSetter def="darptw/routeSetter" dest="darptw_initSolution_data"/>
+        <diSetter def="darptw/routeIndexSetter" dest="darptw_initSolution_data"/>
+    </directStep>
+    
+    <directStep id="darptw_initSolution_05" opDef="darptw/selectClientFromIterator" nextRef="darptw_initSolution_06">
+        <diSetter def="hMod/iterationSetter" dest="darptw_initSolution_data"/>
+        <diSetter def="darptw/clientIdSetter" dest="darptw_initSolution_data"/>
+    </directStep>
+    
+    <directStep id="darptw_initSolution_06" opDef="darptw/selectRandomInsertionPoint" nextRef="darptw_initSolution_07">
+        <diSetter def="darptw/routeSetter" dest="darptw_initSolution_data"/>
+        <diSetter def="darptw/routeIndexSetter" dest="darptw_initSolution_data"/>
+        <diSetter def="darptw/insertionPosSetter" dest="darptw_initSolution_data"/>
+    </directStep>
+    
+    <directStep id="darptw_initSolution_07" opDef="darptw/insertClient" nextRef="darptw_initSolution_08">
+        <diSetter def="darptw/clientIdSetter" dest="darptw_initSolution_data"/>
+        <diSetter def="darptw/routeSetter" dest="darptw_initSolution_data"/>
+        <diSetter def="darptw/routeIndexSetter" dest="darptw_initSolution_data"/>
+        <diSetter def="darptw/insertionPosSetter" dest="darptw_initSolution_data"/>
+    </directStep>
+    
+    <booleanStep id="darptw_initSolution_08" opDef="hMod/iterationMaxCheck" nextTrueRef="darptw_initSolution_09" nextFalseRef="darptw_initSolution_04">
+        <diSetter def="hMod/iterationSetter" dest="darptw_initSolution_data"/>
+    </booleanStep>
+    
+    <directStep id="darptw_initSolution_09" opDef="darptw/writeRoutes">
+        <diSetter def="darptw/solutionSetter" dest="darptw_commonData"/>
+        <diSetter def="darptw/routeSetter" dest="darptw_initSolution_data"/>
+        <diSetter def="darptw/problemInstanceSetter" dest="darptw_commonData"/>
+        <diSetter def="darptw/evaluationProfileSetter" dest="darptw_commonData"/>
+    </directStep>
+    
+</algorithmDefinition>

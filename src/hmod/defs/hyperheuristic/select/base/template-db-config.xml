@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    Updated    : 27/02/2013
+    Author     : Enrique Urra C.
+    Description:
+        IMPORTANT: This file is only a template, you must write or provide your 
+        own version according to your implementation! Read the instructions 
+        below to learn how the file must be specified.
+    
+        Definition file template that configures the domain barrier layer for 
+        high-level/low-level layers' integration. Several components are 
+        required and must been specified in a file that follow this template.
+        For each high-level/low-level layers' integration, the corresponding 
+        domain barrier components must be coded, alongside a new version of this
+        file.
+    
+        The components to consider in this file are the following:
+
+        - The low-level solution type, which corresponds to any class or  
+          interface to be used as the low-level solution.
+        - The low-level solution writer operator, which picks the current 
+          low-level solution from a handler of the domain barrier and store it
+          in the low-level solution interface, after its decoding. This operator
+          must extend the hMod.hyperheuristic.selection.
+          WriteLowLevelSolution<T>' class, in which 'T' is the low-level 
+          solution type described above.
+        - The low-level solution reader operator, which picks the current 
+          low-level solution from the problem domain and store it in a handler 
+          of the domain barrier, allowing its further encoding. This operator 
+          must extend the hMod.hyperheuristic.selection.
+          ReadLowLevelSolution<T>' class, in which 'T' is the low-level solution
+          type described above.
+        - The solution wrapper class, which corresponds to any class that 
+          implements/extends the high-level solution type and encapsulates an 
+          object of the low-level solution type, both the same types mentioned 
+          before. This wrapper represents the concrete implementation of the  
+          high-level solutions manipulated by the hyperheuristic during the 
+          search. The low-level solution encapsulated in the wrapper is used as  
+          the low-level heuristics' input when they are executed.
+        - The decoder operator class, which must extend 'hMod.hyperheuristic.
+          selection.DecodeInput<T,K>', in which 'T' is the high-level solution 
+          type and 'K' is the low-level solution type, both the same types  
+          mentioned before. The decoder is used to retrieve a low-level 
+          heuristic solution encapsulated into a wrapper, before some low-level 
+          heuristic is executed.
+        - The encoder operator class, which must extend 'hMod.hyperheuristic.
+          selection.EncodeOutput<T,K>', in which 'T' is the high-level solution 
+          type and 'K' is the low-level solution type, both the same types  
+          mentioned before. The encoder is used to instantiate a new wrapper  
+          instance and to encapsulate into it the result of a low-level  
+          heuristic execution. Such instance is subsequently used by the
+          hyperheuristic.
+-->
+
+<algorithmDefinition>
+    
+    <!-- 
+        The solution decoder operator definition. 
+        - Replace 'your/decoderContextId' with the context id configured for 
+          your decoder operator.
+        - The base setters are defined here, but any additional data interfaces
+          required may also be added.
+    -->
+    <operator id="selHyp_decoderOp" def="your/decoderContextId">
+        <diSetter def="selHyp/highLevelSolutionSetter" dest="selHyp_mainData"/>
+        <diSetter def="selHyp/lowLevelSolutionSetter" dest="selHyp_diLowLevelHandler"/>
+    </operator>
+    
+    <!-- 
+        The solution encoder operator definition. 
+        - Replace 'your/encoderContextId' with the context id configured for 
+          your encoder operator.
+        - The base setters are defined here, but any additional data interfaces 
+          required may also be added.
+    -->
+    <operator id="selHyp_encoderOp" def="your/encoderContextId">
+        <diSetter def="selHyp/highLevelSolutionSetter" dest="selHyp_mainData"/>
+        <diSetter def="selHyp/lowLevelSolutionSetter" dest="selHyp_diLowLevelHandler"/>
+    </operator>
+    
+    <!-- 
+        The low-level reader operator definition. 
+        - Replace 'your/readerContextId' with the context id configured for 
+          your low-level reader operator.
+        - The data handler at the domain barrier layer is specified. However, 
+          you probably must add a new 'diSetter' entry for the low-level 
+          solution interface reference. This entry depends exclusively on how 
+          the problem domain has been defined.
+    -->
+    <operator id="selHyp_lowLevelReaderOp" def="your/readerContextId">
+        <diSetter def="selHyp/lowLevelSolutionSetter" dest="selHyp_diLowLevelHandler"/>
+        <!-- add your low-level solution interface setter if corresponds -->
+    </operator>
+    
+    <!-- 
+        The low-level writer operator definition.
+        - Replace 'your/writerContextId' with the context id configured for 
+          your low-level writer operator.
+        - The data handler at the domain barrier layer is specified. However, 
+          you probably must add a new 'diSetter' entry for the low-level 
+          solution interface reference. This entry depends exclusively on how 
+          the problem domain has been defined.
+    -->
+    <operator id="selHyp_lowLevelWriterOp" def="your/writerContextId">
+        <diSetter def="selHyp/lowLevelSolutionSetter" dest="selHyp_diLowLevelHandler"/>
+        <!-- add your low-level solution interface setter if corresponds -->
+    </operator>
+    
+</algorithmDefinition>

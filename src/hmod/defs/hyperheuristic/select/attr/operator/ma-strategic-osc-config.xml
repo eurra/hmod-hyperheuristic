@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    Updated    : 26/02/2013
+    Author     : Enrique Urra C.
+    Description:
+        Configuration for the attributive memory model.
+-->
+
+<algorithmDefinition>
+    
+    <!--
+        Elite solutions max.:
+            Defines how many elite solutions will be stored by the acceptance
+            procedure. While bigger the value is, more cpu is required in
+            each iteration, and a slower convergence can be expected. While 
+            lower the value is, less cpu is required in each iteration, and a 
+            faster convergence can be expected.
+    -->
+    <prim id="selHyp_soAcceptanceData_eliteSolsMax" class="int" val="50"/>
+    
+</algorithmDefinition>

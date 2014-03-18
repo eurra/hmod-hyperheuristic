@@ -1,0 +1,81 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Example file for building the hyperheuristic base model.
+% 
+% This file provides an example to build the default hyperheuristic model and a 
+% simple binary problem domain.
+%
+% Remember that definition and batch files are highly customizable. This is
+% only an example of the default hyperheuristic model load. Custom models
+% would require additional components that must be specified an/or exemplified
+% by their providers.
+%
+% Particularly, this file provides all the definitions required to build the
+% model, allowing to load the algorithm in memory. This script do NOT launch
+% the algorithm, see the 'main' batch file for this purpose. After running this 
+% file, the algorithm may be executed directly by calling the 'run' command.
+%
+% This batch file uses two variables, which may be previously set:
+%  - The BASE_PATH variable, which must hold the root path of the base 
+%    hyperheuristic model definitions.
+%  - The BIN_EXAMPLE_PATH variable, which must hold the root path of the binary
+%    problem definitions.
+%
+% Run this file as:
+%     'batch /hmod/defs/hyperheuristic/select/base/example/build'
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Reset any other loaded algorithm
+reset
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SECTION 1: Problem domain configuration
+
+% For allow a selection hyperheuristic model to solve a particular problem, the
+% related domain layer configuration must be provided, which must be based on
+% the template in 'defs/hyperheuristic/select/template-db-config.xml'. Custom 
+% hyperheuristic models should require other files that may be specified in this
+% section.
+load @BASE_PATH@/domain/binExample/db-config.xml
+
+% The low-level heuristics' specification
+load @BASE_PATH@/domain/binExample/llh-config.xml
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SECTION 2: Algorithm structure loading
+
+% Selection hyperheuristic core load
+load @BASE_PATH@/main.xml
+load @BASE_PATH@/data.xml
+
+% Domain barrier operators
+load @BASE_PATH@/operator/db-call-init-heuristic.xml
+load @BASE_PATH@/operator/db-call-heuristic.xml
+load @BASE_PATH@/operator/db-call-end-heuristic.xml
+
+% Heuristic selection operators. If you want to use only one operator, the 
+% others files may be discarded
+load @BASE_PATH@/operator/hs-simple-rand.xml
+load @BASE_PATH@/operator/hs-simple-rand-desc.xml
+load @BASE_PATH@/operator/hs-rand-perm.xml
+load @BASE_PATH@/operator/hs-rand-perm-desc.xml
+load @BASE_PATH@/operator/hs-greedy.xml
+
+% Move acceptance operator. If you intent to use only one operator, the others 
+% files may be discarded
+load @BASE_PATH@/operator/ma-all-moves.xml
+load @BASE_PATH@/operator/ma-improv-equals.xml
+load @BASE_PATH@/operator/ma-only-improv.xml
+
+% Binary example problem load
+load @BIN_EXAMPLE_PATH@/data.xml
+load @BIN_EXAMPLE_PATH@/heuristics/initSolution.xml
+load @BIN_EXAMPLE_PATH@/heuristics/endBinary.xml
+load @BIN_EXAMPLE_PATH@/heuristics/flipAll.xml
+load @BIN_EXAMPLE_PATH@/heuristics/randomMutate.xml
+load @BIN_EXAMPLE_PATH@/heuristics/randomize.xml
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SECTION 3: Configuration
+
+% Run configuration file
+load @BASE_PATH@/example/run-config.xml

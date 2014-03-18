@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<algorithmDefinition>
+  
+    <prim id="selHyp_maxIteration" class="int" val="100000"/>
+    <prim id="selHyp_maxSeconds" class="double" val="-1.0"/>    
+    <ref id="selHyp_heuristicSelectionRef" dest="selHyp_hsStrategicOsc_01"/>
+    <ref id="selHyp_moveAcceptanceRef" dest="selHyp_maImprovingEqual_01"/>
+    
+</algorithmDefinition>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    Updated    : 08/05/2013
+    Author     : Enrique Urra C.
+    Description:
+        The definition of the domain barrier operator for the ending 
+        low-level heuristic calling.
+-->
+
+<algorithmDefinition>
+
+    <directStep id="selHyp_dbCallEndHeuristic_01" nextRef="selHyp_dbCallEndHeuristic_02">
+        <ref dest="selHyp_decoderOp"/>
+    </directStep>
+    
+    <directStep id="selHyp_dbCallEndHeuristic_02" nextRef="selHyp_dbCallEndHeuristic_03">
+        <ref dest="selHyp_lowLevelWriterOp"/>
+    </directStep>
+
+    <subStep id="selHyp_dbCallEndHeuristic_03" subRef="selHyp_endHeuristic"/>
+    
+</algorithmDefinition>

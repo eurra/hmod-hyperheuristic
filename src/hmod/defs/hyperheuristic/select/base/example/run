@@ -1,0 +1,35 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Example file for executing the hyperheuristic base model.
+% 
+% This file provides an example to run a simple binary problem alongside the 
+% default hyperheuristic model.
+%
+% Remember that definition and batch files are highly customizable. This is
+% only an example of the default hyperheuristic model load. Custom models
+% would require additional components that must be specified an/or exemplified
+% by their providers.
+%
+% Particularly, this file configures the environment to run the algorithm. The
+% building itself is implemented in the 'build' file, which is called here.
+%
+% Run this file as:
+%     'batch /hmod/defs/hyperheuristic/select/base/example/run'
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Some variables to use in the algorithm build
+set BASE_PATH /hmod/defs/hyperheuristic/select/base
+set BIN_EXAMPLE_PATH /hmod/defs/problems/binExample
+
+% Algorithm build, implemented in other batch file
+batch @BASE_PATH@/example/build
+
+% Start id configuration
+start_id selHyp_main_01
+
+% Output configuration
+clear_outputs
+add_output selHyp-best-fitness
+add_output binExample-out-info
+
+% Go!
+run

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<algorithmDefinition>
+    
+    <directStep id="darptw_reportResult_01" opDef="darptw/reportResult">
+        <diSetter def="darptw/solutionSetter" dest="darptw_commonData"/>
+    </directStep>
+    
+</algorithmDefinition>

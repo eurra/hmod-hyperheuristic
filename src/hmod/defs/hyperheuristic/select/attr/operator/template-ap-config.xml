@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    Document   : template-ap-config.xml
+    Updated    : 25/02/2013
+    Author     : Enrique Urra C.
+    Description:
+        IMPORTANT: This file is only a template, you must write or provide your 
+        own version according to your implementation! Read the instructions 
+        below to learn how the file must be specified.
+    
+        Definition file template that configures the attribute processors for 
+        the hyperheuristic attributive memory model.
+-->
+
+<algorithmDefinition>
+    
+    <!-- 
+        The array that will store the processor objects.
+        - Replace 'your.attribute.processor.class01', 'your.attribute.processor.
+          class02', etc, with the class of each processor to use. They will be
+          applied in the specified order.
+        - Each processor must implement the 'hMod.hyperheuristic.selection.
+          components.attrMemory.AttrProcessor' interface.
+        - The length of the array must be updated if more processors are 
+          included.
+    -->
+    <array id="selHyp_soData_processors" class="hMod.hyperheuristic.selection.model.attr.AttrProcessor" length="3">
+        <field set="bean" pos="0" valClass="your.attribute.processor.class01"/>
+        <field set="bean" pos="1" valClass="your.attribute.processor.class02"/>
+        <field set="bean" pos="2" valClass="your.attribute.processor.class03"/>
+    </array>
+    
+</algorithmDefinition>

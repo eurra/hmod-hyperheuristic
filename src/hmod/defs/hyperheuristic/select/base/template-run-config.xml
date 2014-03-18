@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    Created on : 22/02/2013
+    Author     : Enrique Urra C.
+    Description:
+        IMPORTANT: This file is only a template, you must write or provide your 
+        own version according to your implementation! Read the instructions 
+        below to learn how the file must be specified.
+    
+        Configuration definition, related to a selection hyperheuristic. This
+        file must be edited and used to particularise a hyperheuristic run.
+        Any additional configuration entry (for example, the data required by
+        custom operators) may be added in this file.
+-->
+
+<algorithmDefinition>
+  
+    <!-- 
+        Termination criteria configuration. The hyperheuristic will finish when
+        at least one of the following criteria is meet during the search.
+        - The 'selHyp_maxIteration' field specifies the maximum iterations to 
+          execute for the algorithm's main body. Use -1 for infinite iterations.
+        - The 'selHyp_maxSeconds' specifies the maximum execution seconds to 
+          keep running the algorithm's main body. Use -1 for infinite time.
+    -->
+    <prim id="selHyp_maxIteration" class="int" val="100"/>
+    <prim id="selHyp_maxSeconds" class="int" val="60"/>
+        
+    <!-- 
+        The heuristic selection operator configuration. Replace 'your_hs_operator_id'
+        with the id of the first step of the operator to use. 
+    -->
+    <ref id="selHyp_heuristicSelectionRef" dest="your_hs_operator_id"/>
+    
+    <!-- 
+        The move acceptance operator configuration. Replace 'your_ma_operator_id'
+        with the id of the first step of the operator to use.
+    -->
+    <ref id="selHyp_moveAcceptanceRef" dest="your_ma_operator_id"/>
+    
+</algorithmDefinition>

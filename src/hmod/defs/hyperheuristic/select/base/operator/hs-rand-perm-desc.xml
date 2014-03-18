@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    Updated    : 26/02/2013
+    Author     : Enrique Urra C.
+    Description:
+        Defines the structure of the Random Permutation Descent heuristic 
+        selection procedure.
+-->
+
+<algorithmDefinition>
+    
+    <!-- The internal data for the selection procedure -->
+    <vBean id="selHyp_hsRandomPermutationDescent_data">
+        <vBeanDef>
+            <vBeanType def="selHyp/randomPermHandler"/>
+        </vBeanDef>
+    </vBean>
+    
+    <!-- The operator starts here -->
+    <booleanStep id="selHyp_hsRandomPermutationDescent_01" opDef="selHyp/randomPermCheckSeq" nextTrueRef="selHyp_hsRandomPermutationDescent_03" nextFalseRef="selHyp_hsRandomPermutationDescent_02">
+        <diSetter def="selHyp/randomPermSetter" dest="selHyp_hsRandomPermutationDescent_data"/>
+    </booleanStep>
+    
+    <booleanStep id="selHyp_hsRandomPermutationDescent_02" opDef="selHyp/checkSolutionImproved" nextTrueRef="selHyp_hsRandomPermutationDescent_04" nextFalseRef="selHyp_hsRandomPermutationDescent_03">
+        <diSetter def="selHyp/shSolutionSetter" dest="selHyp_mainData"/>
+        <diSetter def="selHyp/stepSetter" dest="selHyp_mainData"/>
+    </booleanStep>
+
+    <directStep id="selHyp_hsRandomPermutationDescent_03" opDef="selHyp/randomPermCreateSeq" nextRef="selHyp_hsRandomPermutationDescent_06">
+        <diSetter def="selHyp/randomPermSetter" dest="selHyp_hsRandomPermutationDescent_data"/>
+        <diSetter def="selHyp/stepSetSetter" dest="selHyp_mainData"/>
+    </directStep>
+
+    <booleanStep id="selHyp_hsRandomPermutationDescent_04" opDef="hMod/iterationMaxCheck" nextTrueRef="selHyp_hsRandomPermutationDescent_05" nextFalseRef="selHyp_hsRandomPermutationDescent_06">
+        <diSetter def="hMod/iterationSetter" dest="selHyp_hsRandomPermutationDescent_data"/>
+    </booleanStep>
+
+    <directStep id="selHyp_hsRandomPermutationDescent_05" opDef="selHyp/randomPermRestartSeq" nextRef="selHyp_hsRandomPermutationDescent_06">
+        <diSetter def="selHyp/randomPermSetter" dest="selHyp_hsRandomPermutationDescent_data"/>
+    </directStep>
+
+    <directStep id="selHyp_hsRandomPermutationDescent_06" opDef="selHyp/randomPermNext" nextRef="selHyp_hsRandomPermutationDescent_07">
+        <diSetter def="selHyp/randomPermSetter" dest="selHyp_hsRandomPermutationDescent_data"/>
+        <diSetter def="selHyp/stepSetter" dest="selHyp_mainData"/>
+    </directStep>
+
+    <directStep id="selHyp_hsRandomPermutationDescent_07" opDef="selHyp/initSolution" nextRef="selHyp_hsRandomPermutationDescent_08">
+        <diSetter def="selHyp/shSolutionSetter" dest="selHyp_mainData"/>
+    </directStep>
+
+    <subStep id="selHyp_hsRandomPermutationDescent_08" subRef="selHyp_dbCallHeuristic_01" nextRef="selHyp_hsRandomPermutationDescent_09"/>
+
+    <directStep id="selHyp_hsRandomPermutationDescent_09" opDef="selHyp/selectState">
+        <diSetter def="selHyp/shSolutionSetter" dest="selHyp_mainData"/>
+        <diSetter def="selHyp/stepSetter" dest="selHyp_mainData"/>
+    </directStep>
+    
+</algorithmDefinition>

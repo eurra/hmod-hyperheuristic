@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<algorithmDefinition>
+    
+    <operator id="selHyp_decoderOp" def="darptw/hhSolutionDecode">
+        <diSetter def="selHyp/highLevelSolutionSetter" dest="selHyp_mainData"/>
+        <diSetter def="selHyp/lowLevelSolutionSetter" dest="selHyp_diLowLevelHandler"/>
+    </operator>
+    
+    <operator id="selHyp_encoderOp" def="darptw/hhSolutionEncode">
+        <diSetter def="selHyp/highLevelSolutionSetter" dest="selHyp_mainData"/>
+        <diSetter def="selHyp/lowLevelSolutionSetter" dest="selHyp_diLowLevelHandler"/>
+    </operator>
+    
+    <operator id="selHyp_lowLevelReaderOp" def="darptw/solutionReader">
+        <diSetter def="selHyp/lowLevelSolutionSetter" dest="selHyp_diLowLevelHandler"/>
+        <diSetter def="darptw/solutionSetter" dest="darptw_commonData"/>
+    </operator>
+    
+    <operator id="selHyp_lowLevelWriterOp" def="darptw/solutionWriter">
+        <diSetter def="selHyp/lowLevelSolutionSetter" dest="selHyp_diLowLevelHandler"/>
+        <diSetter def="darptw/solutionSetter" dest="darptw_commonData"/>
+    </operator>
+    
+</algorithmDefinition>

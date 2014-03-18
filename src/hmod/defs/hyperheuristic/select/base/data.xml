@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    Updated    : 25/02/2013
+    Author     : Enrique Urra C.
+    Description:
+        Defines the selection hyperheuristic data objects.
+-->
+
+<algorithmDefinition>
+    
+    <vBean id="selHyp_mainData">
+        <vBeanDef>
+            <vBeanType def="selHyp/shSolutionHandler"/>
+            <vBeanType def="selHyp/stepHandler"/>
+            <vBeanType def="selHyp/stepSetHandler"/>
+            <vBeanType def="hMod/iterationHandler"/>
+            <vBeanType def="hMod/timeElapsedHandler"/>
+        </vBeanDef>
+        <field set="ref" name="MaxIteration" class="int" dest="selHyp_maxIteration"/>
+        <field set="ref" name="MaxSeconds" class="double" dest="selHyp_maxSeconds"/>
+        <field set="ref" name="Heuristics" class="hMod.core.Step" arrDepth="1" dest="selHyp_heuristics"/>
+        <field set="ref" name="InitHeuristic" class="hMod.core.Step" dest="selHyp_initHeuristic"/>
+        <field set="ref" name="EndHeuristic" class="hMod.core.Step" dest="selHyp_endHeuristic"/>
+    </vBean>
+    
+    <vBean id="selHyp_diLowLevelHandler">
+        <vBeanDef>
+            <vBeanType def="selHyp/lowLevelSolutionHandler"/>
+        </vBeanDef>
+    </vBean>
+    
+</algorithmDefinition>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    Updated    : 28/02/2013
+    Author     : Enrique Urra C.
+    Description:
+        Definition file of the 'randomize' heuristic, for the binary example
+        problem.
+-->
+
+<algorithmDefinition>
+        
+    <directStep id="binExample_randomize_01" opDef="binExample/randomize">
+        <diSetter def="binExample/solutionSetter" dest="binExample_data"/>
+    </directStep>
+   
+</algorithmDefinition>

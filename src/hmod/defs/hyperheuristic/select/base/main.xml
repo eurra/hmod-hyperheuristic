@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    Updated    : 25/02/2013
+    Author     : Enrique Urra C.
+    Description:
+        Defines the main selection hyperheuristic skeleton, which provides the 
+        starting point of the algorithm execution.
+-->
+
+<algorithmDefinition>
+    
+    <directStep id="selHyp_main_01" opDef="selHyp/initHyperheuristic" nextRef="selHyp_main_02">
+        <diSetter def="hMod/iterationSetter" dest="selHyp_mainData"/>
+        <diSetter def="hMod/timeElapsedSetter" dest="selHyp_mainData"/>
+    </directStep>
+    
+    <directStep id="selHyp_main_02" opDef="hMod/timeElapsedStart" nextRef="selHyp_main_03">
+        <diSetter def="hMod/timeElapsedSetter" dest="selHyp_mainData"/>
+    </directStep>
+    
+    <subStep id="selHyp_main_03" subRef="selHyp_dbCallInitHeuristic_01" nextRef="selHyp_main_04"/>
+    
+    <subStep id="selHyp_main_04" subRef="selHyp_heuristicSelectionRef" nextRef="selHyp_main_05"/>
+    
+    <subStep id="selHyp_main_05" subRef="selHyp_moveAcceptanceRef" nextRef="selHyp_main_06"/>
+
+    <directStep id="selHyp_main_06" opDef="hMod/iterationMaxCheck" nextRef="selHyp_main_07">
+        <diSetter def="hMod/iterationSetter" dest="selHyp_mainData"/>
+    </directStep>
+    
+    <directStep id="selHyp_main_07" opDef="hMod/timeElapsedCheck" nextRef="selHyp_main_08">
+        <diSetter def="hMod/timeElapsedSetter" dest="selHyp_mainData"/>
+    </directStep>
+    
+    <booleanStep id="selHyp_main_08" opDef="selHyp/checkFinished" nextTrueRef="selHyp_main_09" nextFalseRef="selHyp_main_04">
+        <diSetter def="hMod/iterationSetter" dest="selHyp_mainData"/>
+        <diSetter def="hMod/timeElapsedSetter" dest="selHyp_mainData"/>
+    </booleanStep>
+    
+    <subStep id="selHyp_main_09" subRef="selHyp_dbCallEndHeuristic_01" nextRef="selHyp_main_10"/>
+    
+    <directStep id="selHyp_main_10" opDef="selHyp/endHyperheuristic">
+        <diSetter def="hMod/timeElapsedSetter" dest="selHyp_mainData"/>
+        <diSetter def="selHyp/shSolutionSetter" dest="selHyp_mainData"/>
+    </directStep>
+    
+</algorithmDefinition>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    Updated    : 26/02/2013
+    Author     : Enrique Urra C.
+    Description:
+        Defines the structure of the Greedy heuristic selection procedure.
+-->
+
+<algorithmDefinition>
+    
+    <!-- The internal data for the selection procedure -->
+    <vBean id="selHyp_hsGreedy_data">
+        <vBeanDef>
+            <vBeanType def="selHyp/greedyHandler"/>
+        </vBeanDef>
+    </vBean>
+    
+    <!-- The operator starts here -->
+    <directStep id="selHyp_hsGreedy_01" opDef="selHyp/greedyInit" nextRef="selHyp_hsGreedy_02">
+        <diSetter def="selHyp/greedySetter" dest="selHyp_hsGreedy_data"/>
+        <diSetter def="selHyp/stepSetSetter" dest="selHyp_mainData"/>
+    </directStep>
+
+    <directStep id="selHyp_hsGreedy_02" opDef="selHyp/initSolution" nextRef="selHyp_hsGreedy_03">
+        <diSetter def="selHyp/shSolutionSetter" dest="selHyp_mainData"/>
+    </directStep>
+
+    <directStep id="selHyp_hsGreedy_03" opDef="selHyp/greedyNextHeuristic" nextRef="selHyp_hsGreedy_04">
+        <diSetter def="selHyp/greedySetter" dest="selHyp_hsGreedy_data"/>
+        <diSetter def="selHyp/stepSetter" dest="selHyp_mainData"/>
+        <diSetter def="selHyp/stepSetSetter" dest="selHyp_mainData"/>
+    </directStep>
+    
+    <subStep id="selHyp_hsGreedy_04" subRef="selHyp_dbCallHeuristic_01" nextRef="selHyp_hsGreedy_05"/>
+
+    <directStep id="selHyp_hsGreedy_05" opDef="selHyp/greedyCheckBest" nextRef="selHyp_hsGreedy_06">
+        <diSetter def="selHyp/greedySetter" dest="selHyp_hsGreedy_data"/>
+        <diSetter def="selHyp/shSolutionSetter" dest="selHyp_mainData"/>
+    </directStep>
+
+    <booleanStep id="selHyp_hsGreedy_06" opDef="hMod/iterationMaxCheck" nextTrueRef="selHyp_hsGreedy_07" nextFalseRef="selHyp_hsGreedy_03">
+        <diSetter def="hMod/iterationSetter" dest="selHyp_hsGreedy_data"/>
+    </booleanStep>
+    
+    <directStep id="selHyp_hsGreedy_07" opDef="selHyp/greedySelectBest" nextRef="selHyp_hsGreedy_08">
+        <diSetter def="selHyp/greedySetter" dest="selHyp_hsGreedy_data"/>
+        <diSetter def="selHyp/stepSetter" dest="selHyp_mainData"/>
+        <diSetter def="selHyp/stepSetSetter" dest="selHyp_mainData"/>
+        <diSetter def="selHyp/shSolutionSetter" dest="selHyp_mainData"/>
+    </directStep>
+    
+    <directStep id="selHyp_hsGreedy_08" opDef="selHyp/selectState">
+        <diSetter def="selHyp/shSolutionSetter" dest="selHyp_mainData"/>
+        <diSetter def="selHyp/stepSetter" dest="selHyp_mainData"/>
+    </directStep>
+    
+</algorithmDefinition>

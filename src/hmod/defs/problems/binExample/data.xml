@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    Updated    : 28/02/2013
+    Author     : Enrique Urra C.
+    Description:
+        Data definition file related to the binary example problem.
+-->
+
+<algorithmDefinition>
+    
+    <vBean id="binExample_data">
+        <vBeanDef>
+            <vBeanType def="binExample/solutionHandler"/>
+        </vBeanDef>
+    </vBean>
+    
+</algorithmDefinition>
